@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NUSAVA — Masuk</title>
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Playfair Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            charcoal: '#463F3A',
+            darkInput: '#322D2A',
+            goldPrimary: '#F1C469',
+            goldWarm: '#F3C66F',
+            sageAccent: '#AEAC79',
+            creamParchment: '#FDF3D7',
+            creamLight: '#FCF0DA',
+            textSub: '#C4BDB7',
+            textLabel: '#FBEDCC',
+            errorRed: '#FF6262',
+            btnDarkText: '#4D4542',
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Bespoke Stylesheet -->
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body class="bg-[#463F3A] text-[#FDF3D7] font-sans antialiased overflow-x-hidden select-none">
+
+  <!-- SVG Clip Path Definition for Seamless Convex Curve -->
+  <svg class="absolute w-0 h-0 overflow-hidden" aria-hidden="true" focusable="false">
+    <defs>
+      <clipPath id="curvedPanelClip" clipPathUnits="objectBoundingBox">
+        <!-- Exact Bezier arc matched to Desktop - 4.png -->
+        <path d="M 0,0 L 0.612,0 C 0.88,0.18 1.0,0.38 1.0,0.58 C 1.0,0.76 0.85,0.92 0.578,1.0 L 0,1.0 Z" />
+      </clipPath>
+    </defs>
+  </svg>
+
+  <!-- Main Viewport Container (100vw x 100vh on Desktop) -->
+  <main class="w-screen h-screen min-h-screen relative flex flex-col lg:flex-row overflow-hidden bg-[#463F3A]">
+    
+    <!-- LEFT VISUAL PANEL (Curved Container with Wayang & Clouds) -->
+    <section class="curved-panel-wrapper absolute lg:relative top-0 left-0 h-full w-full lg:w-[56.4%] flex-shrink-0 z-10 pointer-events-none lg:pointer-events-auto" aria-hidden="true">
+      <div class="curved-panel-inner w-full h-full relative overflow-hidden bg-[#FDF3D7]">
+        
+        <!-- Cloud and Watermark Background Layer -->
+        <div class="cloud-parallax-layer absolute inset-0 w-full h-full">
+          <img 
+            src="./latar-ornamen-awan-jawa-tradisional-30.png" 
+            alt="Mega Mendung dan Ornamen Tradisional Jawa" 
+            class="cloud-drift-image absolute left-0 top-0 h-full w-auto min-w-full object-cover object-left select-none pointer-events-none" 
+            draggable="false"
+          />
+        </div>
+
+        <!-- Wayang Puppet Parallax & Idle Wrapper -->
+        <div class="wayang-parallax-wrapper absolute z-20 pointer-events-none select-none">
+          <div class="wayang-base-angle">
+            <div class="wayang-idle-container">
+              <img 
+                src="./wayang-kulit-jawa-berhias-emas-40.png" 
+                alt="Tokoh Wayang Kulit Jawa Berhias Emas" 
+                class="wayang-puppet drop-shadow-wayang select-none pointer-events-none"
+                draggable="false"
+              />
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- RIGHT FORM PANEL (NUSAVA Login Container) -->
+    <section class="login-panel-section relative z-20 flex-1 h-full flex flex-col justify-center items-center px-6 sm:px-10 lg:px-12 py-8 overflow-y-auto lg:overflow-y-hidden">
+      
+      <div class="login-container w-full max-w-[325px] flex flex-col mx-auto">
+        
+        <!-- Brand Header (NUSAVA Logo & Ornate Wayang Head) -->
+        <header class="brand-header form-reveal form-reveal-1 flex flex-col items-center justify-center w-full">
+          <div class="logo-group flex items-center justify-center gap-3">
+            <img 
+              src="./tak-berjudul-74-20261026220354-40.png" 
+              alt="NUSAVA Icon" 
+              class="nusava-icon h-[52px] w-auto object-contain select-none"
+              draggable="false"
+            />
+            <span class="nusava-title font-serif font-extrabold text-[32px] tracking-[0.14em] uppercase select-none leading-none">
+              <span class="text-[#F1C469]">NUSA</span><span class="text-[#AEAC79]">VA</span>
+            </span>
+          </div>
+
+          <!-- Ornate Horizontal Divider with Center Diamond Accent -->
+          <div class="ornate-divider relative flex items-center justify-center w-[440px] max-w-[90vw] mt-4 mb-7 self-center" aria-hidden="true">
+            <div class="divider-line w-full h-[1.5px]"></div>
+            <div class="divider-diamond absolute w-2 h-2 bg-[#F1C469] rotate-45 shadow-[0_0_8px_rgba(241,196,105,0.85)]"></div>
+          </div>
+        </header>
+
+        <!-- Typography Heading -->
+        <div class="form-title-group form-reveal form-reveal-2 text-left mb-6 w-full">
+          <h1 class="login-heading text-4xl font-bold text-[#FDF3D7] tracking-wide uppercase leading-tight font-sans">
+            LOGIN
+          </h1>
+          <p class="login-subtext text-[15px] text-[#C4BDB7] font-light mt-1.5 tracking-normal">
+            Silahkan masuk dengan akun anda
+          </p>
+        </div>
+
+        <!-- Form Element -->
+        <form id="loginForm" class="login-form flex flex-col gap-4 w-full" novalidate autocomplete="on">
+          
+          <!-- Email Input Group -->
+          <div class="input-group form-reveal form-reveal-3 flex flex-col gap-1.5 w-full">
+            <label for="emailInput" class="input-label text-sm font-semibold text-[#FBEDCC] flex items-center gap-1 select-none">
+              Email <span class="required-star text-[#FF6262] font-bold" aria-hidden="true">*</span>
+            </label>
+            <div class="input-wrapper relative w-full">
+              <input 
+                type="email" 
+                id="emailInput" 
+                name="email" 
+                required 
+                autocomplete="email" 
+                placeholder="Masukkan Alamat Email" 
+                class="form-input w-full h-[34px] bg-[#322D2A] text-[#FDF3D7] text-sm px-3 rounded-[5px] border border-[#4A433E] focus:border-[#F1C469] focus:outline-none focus:ring-1 focus:ring-[#F1C469] transition-all duration-200 placeholder-[#FCECCC]/60"
+              />
+            </div>
+            <p id="emailHelper" class="helper-text text-xs text-[#C4BDB7] font-normal transition-colors mt-0.5">
+              Format email example@gmail.com
+            </p>
+          </div>
+
+          <!-- Password Input Group -->
+          <div class="input-group form-reveal form-reveal-4 flex flex-col gap-1.5 w-full mt-0.5">
+            <label for="passwordInput" class="input-label text-sm font-semibold text-[#FBEDCC] flex items-center gap-1 select-none">
+              Password <span class="required-star text-[#FF6262] font-bold" aria-hidden="true">*</span>
+            </label>
+            <div class="input-wrapper relative w-full">
+              <input 
+                type="password" 
+                id="passwordInput" 
+                name="password" 
+                required 
+                autocomplete="current-password" 
+                placeholder="Masukkan Password" 
+                class="form-input password-input w-full h-[34px] bg-[#322D2A] text-[#FDF3D7] text-sm pl-3 pr-10 rounded-[5px] border border-[#4A433E] focus:border-[#F1C469] focus:outline-none focus:ring-1 focus:ring-[#F1C469] transition-all duration-200 placeholder-[#FCECCC]/60"
+              />
+              <button 
+                type="button" 
+                id="togglePasswordBtn" 
+                class="toggle-eye-btn absolute right-2.5 top-1/2 -translate-y-1/2 p-1 text-[#FFF8EE]/65 hover:text-[#F1C469] focus:outline-none focus:text-[#F1C469] transition-colors" 
+                aria-label="Tampilkan password"
+                title="Tampilkan password"
+              >
+                <!-- Eye Open SVG (Default) -->
+                <svg id="eyeOpenSvg" class="eye-svg w-5 h-3.5 block" viewBox="0 0 25 15" fill="none" stroke="currentColor">
+                  <path opacity="0.9" d="M24.5377 6.38786C25.1541 7.05214 25.1541 7.94893 24.5377 8.61214C22.5963 10.7004 17.9385 15 12.5005 15C7.06255 15 2.40476 10.7004 0.463357 8.61214C0.163054 8.29422 0 7.90286 0 7.5C0 7.09714 0.163054 6.70578 0.463357 6.38786C2.40476 4.29964 7.06255 0 12.5005 0C17.9385 0 22.5963 4.29964 24.5377 6.38786Z" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="12.5" cy="7.5" r="3.2" stroke-width="1.6"/>
+                </svg>
+                <!-- Eye Slashed SVG (Revealed) -->
+                <svg id="eyeSlashSvg" class="eye-svg w-5 h-3.5 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                  <line x1="1" y1="1" x2="23" y2="23"></line>
+                </svg>
+              </button>
+            </div>
+            <!-- Lupa Password Link Right-Aligned -->
+            <div class="forgot-wrapper flex justify-end mt-1">
+              <a href="#lupa-password" id="forgotPasswordLink" class="forgot-link text-sm text-[#F1C469] hover:text-[#fad88b] hover:underline font-medium transition-colors">
+                Lupa Password?
+              </a>
+            </div>
+          </div>
+
+          <!-- Submit Button (Pill Shaped CTA) -->
+          <div class="cta-wrapper form-reveal form-reveal-5 mt-2.5 w-full">
+            <button 
+              type="submit" 
+              id="submitBtn" 
+              class="cta-button w-full h-[34px] rounded-full bg-[#F3C66F] hover:bg-[#fad88b] text-[#4D4542] font-semibold text-sm tracking-wide transition-all duration-300 shadow-md hover:shadow-[0_0_22px_rgba(243,198,111,0.5)] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#F1C469] flex items-center justify-center gap-2"
+            >
+              <span id="btnText">Masuk</span>
+              <svg id="btnSpinner" class="animate-spin -ml-1 mr-2 h-4 w-4 text-[#4D4542] hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Footer Registration Prompt -->
+          <div class="form-footer form-reveal form-reveal-6 text-center mt-3 text-sm text-[#C4BDB7]">
+            <span>Belum punya akun?</span>
+            <a href="#daftar" id="registerLink" class="register-link text-[#F1C469] font-semibold hover:underline hover:text-[#fad88b] transition-colors ml-1">
+              Daftar
+            </a>
+          </div>
+
+        </form>
+
+        <!-- Notification Toast (Success / Notice) -->
+        <div id="formToast" class="toast-notification fixed bottom-6 right-6 bg-[#322D2A] border border-[#F1C469] text-[#FDF3D7] px-4 py-3 rounded-lg shadow-2xl flex items-center gap-3 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none z-50" role="alert">
+          <span class="toast-icon text-[#F1C469] text-lg">✦</span>
+          <span id="toastMessage" class="text-sm font-medium"></span>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- External Script -->
+  <script src="./script.js"></script>
+</body>
+</html>

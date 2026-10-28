@@ -1,0 +1,589 @@
+/* ==========================================================================
+   NUSAVA - Bespoke Production Stylesheet
+   Pixel-perfect implementation of Figma Desktop - 4.png design specification
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Design Tokens & Fonts
+   -------------------------------------------------------------------------- */
+:root {
+  --color-bg-base: #463F3A;
+  --color-panel-cream: #FDF3D7;
+  --color-input-bg: #322D2A;
+  --color-input-border: #4A433E;
+  --color-gold-primary: #F1C469;
+  --color-gold-button: #F3C66F;
+  --color-sage-accent: #AEAC79;
+  --color-text-heading: #FDF3D7;
+  --color-text-sub: #FCF0DA;
+  --color-text-label: #FBEDCC;
+  --color-text-helper: #FCECCC;
+  --color-error: #FF6262;
+  --color-btn-text: #4D4542;
+
+  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-brand: 'Playfair Display', Georgia, serif;
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset & Viewport Constraints
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-bg-base);
+  color: var(--color-text-heading);
+  font-family: var(--font-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.svg-defs-hidden {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.main-viewport {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  background-color: var(--color-bg-base);
+}
+
+/* --------------------------------------------------------------------------
+   3. Left Visual Panel (Convex Curved Container & Entrance Animation)
+   -------------------------------------------------------------------------- */
+.curved-panel-wrapper {
+  position: relative;
+  height: 100%;
+  width: 56.4%;
+  flex-shrink: 0;
+  z-index: 10;
+  transform-origin: left center;
+  animation: panelEntrance 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: transform;
+}
+
+@keyframes panelEntrance {
+  0% {
+    transform: translateX(-100%) scaleX(0.85);
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateX(0) scaleX(1);
+    opacity: 1;
+  }
+}
+
+.curved-panel-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background: var(--color-panel-cream);
+  clip-path: url(#curvedPanelClip);
+  -webkit-clip-path: url(#curvedPanelClip);
+}
+
+/* Mega Mendung Clouds & Gunungan Watermark */
+.cloud-parallax-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.cloud-drift-image {
+  position: absolute;
+  left: -50px;
+  top: -20px;
+  height: calc(100% + 40px);
+  width: auto;
+  min-width: calc(100% + 100px);
+  max-width: none;
+  object-fit: cover;
+  object-position: left center;
+  animation: cloudDrift 7s ease-in-out infinite alternate;
+  will-change: transform;
+  pointer-events: none;
+  user-select: none;
+}
+
+@keyframes cloudDrift {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  100% {
+    transform: translateX(-14px) translateY(-4px);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. Wayang Kulit Puppet (Entrance, Angle, Idle & Drop Shadow)
+   -------------------------------------------------------------------------- */
+.wayang-parallax-wrapper {
+  position: absolute;
+  left: clamp(210px, 18vw, 262px);
+  top: clamp(75px, 11.5vh, 102px);
+  z-index: 20;
+  pointer-events: none;
+  user-select: none;
+  animation: wayangEntrance 1.0s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+  will-change: transform;
+}
+
+@keyframes wayangEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(35px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wayang-base-angle {
+  transform: rotate(8deg);
+  transform-origin: 40% 70%;
+}
+
+.wayang-idle-container {
+  transform-origin: bottom center;
+  animation: wayangIdle 4.5s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes wayangIdle {
+  0% {
+    transform: translateY(0) rotate(-1.5deg) scale(1);
+  }
+  100% {
+    transform: translateY(-8px) rotate(1.5deg) scale(1.015);
+  }
+}
+
+.wayang-puppet {
+  width: clamp(375px, 28.5vw, 410px);
+  height: auto;
+  aspect-ratio: 409.59 / 578.86;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+.drop-shadow-wayang {
+  filter: drop-shadow(0 15px 22px rgba(0, 0, 0, 0.35));
+}
+
+/* --------------------------------------------------------------------------
+   5. Right Form Panel (NUSAVA Login Container)
+   -------------------------------------------------------------------------- */
+.login-panel-section {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 20px;
+  z-index: 20;
+  overflow-y: auto;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 323px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+/* Brand Header */
+.brand-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.logo-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.nusava-icon {
+  width: 54px;
+  height: 52px;
+  object-fit: contain;
+  user-select: none;
+}
+
+.nusava-title {
+  font-family: var(--font-brand);
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1;
+  user-select: none;
+}
+
+.ornate-divider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 440px;
+  max-width: 90vw;
+  margin-top: 18px;
+  margin-bottom: 32px;
+  align-self: center;
+}
+
+.divider-line {
+  width: 100%;
+  height: 1.5px;
+  background: linear-gradient(
+    90deg, 
+    rgba(241, 196, 105, 0) 0%, 
+    rgba(241, 196, 105, 0.75) 35%, 
+    rgba(241, 196, 105, 1) 50%, 
+    rgba(241, 196, 105, 0.75) 65%, 
+    rgba(241, 196, 105, 0) 100%
+  );
+}
+
+.divider-diamond {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-gold-primary);
+  transform: rotate(45deg);
+  box-shadow: 0 0 8px rgba(241, 196, 105, 0.85);
+}
+
+/* Heading & Subtext */
+.form-title-group {
+  text-align: left;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+.login-heading {
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--color-text-heading);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.login-subtext {
+  font-size: 15px;
+  font-weight: 300;
+  color: #FCF0DA;
+  margin-top: 6px;
+  letter-spacing: normal;
+}
+
+/* Form Structure */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.input-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-label);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  user-select: none;
+}
+
+.required-star {
+  color: var(--color-error);
+  font-weight: 700;
+}
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.form-input {
+  width: 100%;
+  height: 34px;
+  background-color: var(--color-input-bg);
+  color: var(--color-text-heading);
+  font-size: 14px;
+  font-family: var(--font-main);
+  padding: 0 12px;
+  border-radius: 5px;
+  border: 1px solid var(--color-input-border);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+.form-input::placeholder {
+  color: rgba(252, 236, 204, 0.65);
+  font-weight: 400;
+}
+
+.form-input:focus {
+  border-color: var(--color-gold-primary);
+  box-shadow: 0 0 0 1px var(--color-gold-primary), 0 0 14px rgba(241, 196, 105, 0.25);
+}
+
+.form-input.is-invalid {
+  border-color: var(--color-error) !important;
+  box-shadow: 0 0 0 1px var(--color-error), 0 0 12px rgba(255, 98, 98, 0.25) !important;
+}
+
+.password-input {
+  padding-right: 38px;
+}
+
+.toggle-eye-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 4px;
+  color: rgba(255, 248, 238, 0.65);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease, transform 0.15s ease;
+}
+
+.toggle-eye-btn:hover {
+  color: var(--color-gold-primary);
+}
+
+.toggle-eye-btn:active {
+  transform: translateY(-50%) scale(0.9);
+}
+
+.eye-svg {
+  width: 20px;
+  height: 14px;
+  display: block;
+}
+
+.helper-text {
+  font-size: 12px;
+  color: #FCECCC;
+  margin-top: 2px;
+  transition: color 0.2s ease;
+}
+
+.forgot-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 4px;
+}
+
+.forgot-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-gold-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.forgot-link:hover {
+  color: #fad88b;
+  text-decoration: underline;
+}
+
+/* CTA Submit Button */
+.cta-wrapper {
+  margin-top: 10px;
+  width: 100%;
+}
+
+.cta-button {
+  width: 100%;
+  height: 34px;
+  background-color: var(--color-gold-button);
+  color: var(--color-btn-text);
+  font-family: var(--font-main);
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.15s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.cta-button:hover {
+  background-color: #fad88b;
+  box-shadow: 0 0 22px rgba(243, 198, 111, 0.5), 0 4px 14px rgba(0, 0, 0, 0.3);
+  transform: scale(1.01);
+}
+
+.cta-button:active {
+  transform: scale(0.98);
+}
+
+/* Footer Prompt */
+.form-footer {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 14px;
+  color: #FCECCC;
+}
+
+.register-link {
+  color: var(--color-gold-primary);
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 4px;
+  transition: color 0.2s ease;
+}
+
+.register-link:hover {
+  color: #fad88b;
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   6. Staggered Entrance Animations
+   -------------------------------------------------------------------------- */
+@keyframes formItemEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-reveal {
+  animation: formItemEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.form-reveal-1 { animation-delay: 0.32s; }
+.form-reveal-2 { animation-delay: 0.46s; }
+.form-reveal-3 { animation-delay: 0.60s; }
+.form-reveal-4 { animation-delay: 0.74s; }
+.form-reveal-5 { animation-delay: 0.88s; }
+.form-reveal-6 { animation-delay: 1.02s; }
+
+/* --------------------------------------------------------------------------
+   7. Toast Notification
+   -------------------------------------------------------------------------- */
+.toast-notification {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: var(--color-input-bg);
+  border: 1px solid var(--color-gold-primary);
+  color: var(--color-text-heading);
+  padding: 12px 18px;
+  border-radius: 8px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.toast-notification.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.toast-icon {
+  color: var(--color-gold-primary);
+  font-size: 16px;
+}
+
+/* --------------------------------------------------------------------------
+   8. Responsive Fallback for Smaller Screens (< 1024px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1023px) {
+  .main-viewport {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+
+  .curved-panel-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.16;
+    animation: none;
+    pointer-events: none;
+  }
+
+  .curved-panel-inner {
+    clip-path: none;
+    -webkit-clip-path: none;
+  }
+
+  .wayang-parallax-wrapper {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) !important;
+    animation: none;
+    opacity: 0.15;
+  }
+
+  .wayang-puppet {
+    width: 320px;
+  }
+
+  .login-panel-section {
+    padding: 60px 20px 40px;
+  }
+}
