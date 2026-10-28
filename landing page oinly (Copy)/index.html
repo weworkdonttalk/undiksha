@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nusava — Merawat Budaya, Menggerakkan Karya</title>
+  <meta name="description" content="Platform digital kurasi dan apresiasi warisan budaya Indonesia — jelajahi kepulauan Nusantara, dukung pengrajin lokal, dan temukan karya kriya otentik.">
+
+  <!-- Tailwind CSS CDN with custom config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ivory:    '#FBF3E4',
+            'ivory-soft': '#FCF0DA',
+            card:     '#FFFDF9',
+            dark:     '#3E3630',
+            'dark-2': '#4A3E38',
+            gold:     '#D99B26',
+            'gold-light': '#F1C469',
+            amber:    '#E5A93C',
+            olive:    '#AEAC79',
+          },
+          fontFamily: {
+            display:  ['"Playfair Display"', 'Georgia', 'serif'],
+            garamond: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans:     ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          },
+          transitionTimingFunction: {
+            luxury: 'cubic-bezier(0.22, 1, 0.36, 1)',
+            expo:   'cubic-bezier(0.16, 1, 0.3, 1)',
+          },
+        }
+      }
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="bg-[#FBF3E4] text-[#3E3630]">
+
+<!-- =========================================================================
+     NAVBAR — sticky editorial bar
+     ========================================================================= -->
+<header id="navbar" class="fixed top-0 inset-x-0 z-50 px-6 lg:px-12 h-16 flex items-center justify-between">
+
+  <!-- Logo -->
+  <a href="#hero" class="flex items-center gap-2.5 flex-shrink-0">
+    <span class="font-garamond text-2xl font-normal italic tracking-wide text-[#3E3630]">Nusa<span class="text-[#D99B26] not-italic font-semibold">va</span></span>
+    <span class="hidden sm:block text-[8px] font-sans font-semibold tracking-[0.22em] uppercase text-[#6B6158] border-l border-[#E8D9C0] pl-2.5 leading-tight">Merawat Budaya<br>Menggerakkan Karya</span>
+  </a>
+
+  <!-- Desktop nav -->
+  <nav class="hidden lg:flex items-center gap-8" aria-label="Navigasi Utama">
+    <a href="#jelajah" class="text-[11px] font-sans font-semibold tracking-[0.18em] uppercase text-[#6B6158] hover:text-[#3E3630] transition-colors">Jelajah</a>
+    <a href="#ragam-budaya" class="text-[11px] font-sans font-semibold tracking-[0.18em] uppercase text-[#6B6158] hover:text-[#3E3630] transition-colors">Warisan</a>
+    <a href="#produk" class="text-[11px] font-sans font-semibold tracking-[0.18em] uppercase text-[#6B6158] hover:text-[#3E3630] transition-colors">Produk</a>
+    <a href="#pasar" class="text-[11px] font-sans font-semibold tracking-[0.18em] uppercase text-[#6B6158] hover:text-[#3E3630] transition-colors">Pasar Kriya</a>
+    <a href="#jurnal" class="text-[11px] font-sans font-semibold tracking-[0.18em] uppercase text-[#6B6158] hover:text-[#3E3630] transition-colors">Jurnal</a>
+  </nav>
+
+  <!-- Actions -->
+  <div class="flex items-center gap-4">
+    <!-- Cart -->
+    <button class="relative p-2 text-[#3E3630] hover:text-[#D99B26] transition-colors" aria-label="Keranjang">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+      <span id="cart-count" class="hidden absolute -top-1 -right-1 w-[18px] h-[18px] rounded-full bg-[#D99B26] text-white text-[11px] font-bold flex items-center justify-center leading-none">0</span>
+    </button>
+    <!-- CTA -->
+    <a href="#pasar" class="hidden sm:inline-flex items-center gap-2 px-5 py-2 border border-[#3E3630] text-[11px] font-sans font-bold tracking-[0.16em] uppercase text-[#3E3630] hover:bg-[#3E3630] hover:text-white transition-all duration-300">Dukung Pengrajin</a>
+    <!-- Hamburger -->
+    <button id="mobile-menu-btn" class="lg:hidden p-2 text-[#3E3630]" aria-label="Buka Menu">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile Drawer -->
+<div id="mobile-drawer" class="fixed inset-y-0 right-0 w-72 bg-[#FBF3E4] z-[60] transform translate-x-full transition-transform duration-luxury shadow-2xl flex flex-col p-8">
+  <button id="mobile-menu-close" class="self-end mb-8 text-[#3E3630]" aria-label="Tutup">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
+  </button>
+  <nav class="flex flex-col gap-6">
+    <a href="#jelajah"       class="font-garamond text-xl font-normal text-[#3E3630] border-b border-[#E8D9C0] pb-4">Jelajah Kepulauan</a>
+    <a href="#ragam-budaya"  class="font-garamond text-xl font-normal text-[#3E3630] border-b border-[#E8D9C0] pb-4">Ragam Warisan</a>
+    <a href="#produk"        class="font-garamond text-xl font-normal text-[#3E3630] border-b border-[#E8D9C0] pb-4">Produk Nusava</a>
+    <a href="#pasar"         class="font-garamond text-xl font-normal text-[#3E3630] border-b border-[#E8D9C0] pb-4">Pasar Kriya</a>
+    <a href="#jurnal"        class="font-garamond text-xl font-normal text-[#3E3630]">Jurnal Nusantara</a>
+  </nav>
+  <a href="#pasar" class="mt-auto w-full py-3 text-center text-[11px] font-bold tracking-[0.18em] uppercase bg-[#3E3630] text-white">Dukung Pengrajin</a>
+</div>
+
+<!-- =========================================================================
+     STICKY SUB-NAV (visible after hero scroll)
+     ========================================================================= -->
+<div id="sub-nav" class="hidden-subnav fixed top-16 inset-x-0 z-40 bg-[#FBF3E4]/90 backdrop-blur-md border-b border-[#E8D9C0]">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 h-10 flex items-center gap-8 sm:gap-10 overflow-x-auto no-scrollbar">
+    <a href="#jelajah"      class="sub-nav-link text-xs flex-shrink-0"><span class="text-[#D99B26] font-bold mr-1.5">01</span> Jelajah Area</a>
+    <a href="#ragam-budaya" class="sub-nav-link text-xs flex-shrink-0"><span class="text-[#D99B26] font-bold mr-1.5">02</span> Warisan</a>
+    <a href="#produk"       class="sub-nav-link text-xs flex-shrink-0"><span class="text-[#D99B26] font-bold mr-1.5">03</span> Produk Nusani</a>
+    <a href="#pasar"        class="sub-nav-link text-xs flex-shrink-0"><span class="text-[#D99B26] font-bold mr-1.5">04</span> Pasar Kriya</a>
+    <a href="#jurnal"       class="sub-nav-link text-xs flex-shrink-0"><span class="text-[#D99B26] font-bold mr-1.5">05</span> Jurnal</a>
+  </div>
+</div>
+
+<!-- =========================================================================
+     HERO SECTION — editorial AYANA style
+     ========================================================================= -->
+<section id="hero" class="relative min-h-screen flex flex-col overflow-hidden bg-[#FBF3E4]">
+
+  <!-- Mega Mendung cloud backgrounds -->
+  <div class="cloud-parallax absolute inset-0 pointer-events-none opacity-[0.055] bg-center bg-cover"
+       style="background-image:url('assets/images/latar-ornamen-awan-jawa-tradisional-10.png')"></div>
+
+  <!-- Wayang ornaments -->
+  <img id="wayang-left"
+       src="assets/images/wayang-kulit-jawa-berhias-emas-10.png"
+       alt=""
+       aria-hidden="true"
+       class="wayang-parallax hero-ornament absolute left-0 bottom-0 w-[clamp(160px,20vw,280px)] opacity-[0.55] object-contain object-bottom pointer-events-none select-none">
+  <img id="wayang-right"
+       src="assets/images/wayang-kulit-jawa-berhias-emas-20.png"
+       alt=""
+       aria-hidden="true"
+       class="wayang-parallax hero-ornament absolute right-0 bottom-0 w-[clamp(160px,20vw,280px)] opacity-[0.55] object-contain object-bottom pointer-events-none select-none scale-x-[-1]">
+
+  <!-- Hero content -->
+  <div class="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-6 pt-28 pb-16">
+
+    <!-- Eyebrow -->
+    <div class="reveal flex items-center gap-4 mb-8">
+      <span class="hairline-gold flex-1 max-w-[60px]"></span>
+      <span class="text-eyebrow">Nusantara · Merawat Budaya</span>
+      <span class="hairline-gold flex-1 max-w-[60px]"></span>
+    </div>
+
+    <!-- Main heading -->
+    <h1 class="reveal delay-100 text-ayana-hero text-[clamp(2.8rem,7vw,5.5rem)] text-[#3E3630] max-w-4xl">
+      Merawat Budaya<br>
+      <em class="text-[#D99B26]">Menggerakkan Karya</em>
+    </h1>
+
+    <!-- Tagline -->
+    <p class="reveal delay-200 mt-6 font-sans font-light text-base sm:text-lg text-[#6B6158] max-w-lg leading-relaxed">
+      Platform digital pelestarian warisan budaya Indonesia : dari Sabang sampai merauke, dari pengrajin ke dunia.
+    </p>
+
+    <!-- CTA pair -->
+    <div class="reveal delay-300 mt-10 flex flex-wrap items-center justify-center gap-4">
+      <a href="#jelajah" class="inline-flex items-center gap-2.5 px-8 py-3.5 bg-[#3E3630] text-white text-[11px] font-sans font-bold tracking-[0.2em] uppercase hover:bg-[#D99B26] hover:text-[#3E3630] transition-colors duration-300">
+        Mulai Jelajah
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      </a>
+      <a href="#pasar" class="inline-flex items-center gap-2.5 px-8 py-3.5 border border-[#3E3630] text-[#3E3630] text-[11px] font-sans font-bold tracking-[0.2em] uppercase hover:border-[#D99B26] hover:text-[#D99B26] transition-colors duration-300">Pasar Karya</a>
+    </div>
+
+    <!-- Scroll hint -->
+    <div class="reveal delay-400 mt-14 flex flex-col items-center gap-2 text-[#6B6158]">
+      <span class="text-[11px] font-sans tracking-[0.2em] uppercase">Gulir ke Bawah</span>
+      <svg class="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+    </div>
+  </div>
+
+  <!-- Gold hairline divider below hero -->
+  <div class="hairline-gold"></div>
+</section>
+
+<!-- =========================================================================
+     VIDEO ARCH SECTION — Wonderful Indonesia (Full Edge-to-Edge AYANA Bali)
+     ========================================================================= -->
+<section id="video-arch" class="relative w-full bg-[#FBF3E4] pb-0 overflow-hidden">
+  <!-- Subtle ambient gradient lighting -->
+  <div class="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#FBF3E4] via-[#FCF0DA]/50 to-transparent pointer-events-none"></div>
+
+  <!-- Section intro (Centered) -->
+  <div class="max-w-4xl mx-auto px-6 text-center pt-16 pb-12 sm:pt-24 sm:pb-16 relative z-10">
+    <p class="text-eyebrow reveal mb-4">N° Intro : Film Nusantara</p>
+    <h2 class="reveal delay-100 font-display font-bold text-3xl sm:text-5xl lg:text-6xl text-[#3E3630] leading-tight">
+      Jelajahi Keindahan Budaya <span class="text-[#D99B26]">Nusantara</span>
+    </h2>
+    <p class="mt-4 text-[#6B6158] text-base sm:text-lg max-w-xl mx-auto font-sans leading-relaxed">
+      Saksikan mahakarya ribuan pulau, tradisi luhur, dan kearifan para pengrajin dalam balutan sinematik layar penuh.
+    </p>
+  </div>
+
+  <!-- 100% Full-Bleed Edge-to-Edge Video Frame (Kiri ke Kanan Penuh ala AYANA Bali) -->
+  <div class="video-arch-wrapper w-full px-0 mx-0 relative">
+    <div id="video-arch-frame" class="video-arch-frame video-reveal relative w-full h-[75vh] sm:h-[88vh] lg:h-[95vh] min-h-[560px] sm:min-h-[720px] lg:min-h-[860px]">
+
+      <!-- Autoplay silent background video -->
+      <video
+        id="hero-video-bg"
+        src="./assets/video/wonderful-indonesia.mp4"
+        autoplay muted loop playsinline
+        poster="assets/images/image-30.png"
+        class="absolute inset-0 w-full h-full object-cover"
+        aria-hidden="true">
+        <source src="./assets/video/wonderful-indonesia.mp4" type="video/mp4">
+      </video>
+
+      <!-- Dark overlay gradient -->
+      <div class="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-black/60 pointer-events-none"></div>
+
+      <!-- Overlay text & CTA -->
+      <div class="absolute inset-0 flex flex-col items-center justify-end pb-14 sm:pb-24 px-6 text-center z-10">
+        <p class="text-eyebrow text-white/80 mb-3 reveal">Wonderful Indonesia</p>
+        <h3 class="reveal delay-100 font-garamond font-light italic text-white text-2xl sm:text-4xl lg:text-5xl leading-tight mb-8 drop-shadow-lg">
+          Setiap sudut Nusantara<br>menyimpan cerita yang menunggu
+        </h3>
+
+        <!-- Play Movie CTA — AYANA style -->
+        <button data-open-modal="video"
+          class="btn-glass reveal delay-200 inline-flex items-center gap-4 px-8 py-4.5 rounded-full cursor-pointer hover:shadow-2xl transition-all"
+          aria-label="Putar Video Wonderful Indonesia">
+          <!-- Play ring -->
+          <span class="relative flex items-center justify-center w-11 h-11">
+            <span class="play-ring absolute inset-0 rounded-full border border-white/60"></span>
+            <svg class="w-4 h-4 text-white fill-white ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </span>
+          <span class="text-white text-xs font-bold tracking-[0.24em] uppercase">Play Movie · Tonton Video</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Soft gradient wash to next section -->
+  <div class="w-full h-16 sm:h-24 bg-gradient-to-b from-transparent via-[#FCF0DA]/30 to-[#FBF3E4] pointer-events-none -mt-6"></div>
+</section>
+
+<!-- =========================================================================
+     HIGHLIGHT STATS — AYANA big-number style
+     ========================================================================= -->
+<section id="highlights" class="bg-[#FBF3E4] py-20 sm:py-28 border-b border-[#E8D9C0]">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
+    <!-- Section header -->
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-24 items-start mb-16 sm:mb-20">
+      <div class="reveal">
+        <p class="text-[11px] font-sans font-semibold tracking-[0.18em] uppercase text-[#9A6F00] mb-4">Tentang Nusantara</p>
+        <h2 class="font-display font-bold text-3xl sm:text-4xl text-[#3E3630] leading-tight">
+          Kepulauan Terluas,<br>Budaya Terkaya di Dunia
+        </h2>
+      </div>
+      <div class="reveal delay-200">
+        <p class="font-sans text-[#6B6158] leading-relaxed text-base mb-4">
+          Nusava adalah inisiatif platform karya siswa <strong>SMKN 1 Denpasar</strong> yang berdedikasi menjembatani digitalisasi bagi para pelaku UMKM pengrajin budaya lokal, menghadirkan ruang etalase berteknologi modern agar mahakarya tradisional dapat diapresiasi secara global.
+        </p>
+        <div class="flex items-center gap-3">
+          <img src="assets/images/image-70.png" alt="Pengrajin Nusava" class="w-12 h-12 rounded-full object-cover border-2 border-[#D99B26]">
+          <img src="assets/images/image-80.png" alt="Pengrajin Nusava" class="w-12 h-12 rounded-full object-cover border-2 border-[#D99B26] -ml-4">
+          <img src="assets/images/image-90.png" alt="Pengrajin Nusava" class="w-12 h-12 rounded-full object-cover border-2 border-[#D99B26] -ml-4">
+          <span class="text-xs text-[#6B6158] ml-2">10.000+ pengrajin tergabung</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats row -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-0">
+      <!-- Stat 1 -->
+      <div class="reveal border-t border-[#E8D9C0] pt-8 pb-10 pr-8 lg:border-r">
+        <div class="flex items-baseline gap-1 leading-none mb-3">
+          <span data-count="17000" data-suffix="+" class="stat-number">0</span>
+        </div>
+        <p class="text-xs font-sans font-bold tracking-[0.18em] uppercase text-[#3E3630]">Pulau Nusantara</p>
+      </div>
+      <!-- Stat 2 -->
+      <div class="reveal delay-200 border-t border-[#E8D9C0] pt-8 pb-10 px-8 lg:border-r">
+        <div class="flex items-baseline gap-1 leading-none mb-3">
+          <span data-count="1340" data-suffix="+" class="stat-number">0</span>
+        </div>
+        <p class="text-xs font-sans font-bold tracking-[0.18em] uppercase text-[#3E3630]">Suku Bangsa</p>
+      </div>
+      <!-- Stat 3 -->
+      <div class="reveal delay-300 border-t border-[#E8D9C0] pt-8 pb-10 px-8 lg:border-r">
+        <div class="flex items-baseline gap-1 leading-none mb-3">
+          <span data-count="700" data-suffix="+" class="stat-number">0</span>
+        </div>
+        <p class="text-xs font-sans font-bold tracking-[0.18em] uppercase text-[#3E3630]">Bahasa Daerah</p>
+      </div>
+      <!-- Stat 4 -->
+      <div class="reveal delay-400 border-t border-[#E8D9C0] pt-8 pb-10 pl-8">
+        <div class="flex items-baseline gap-1 leading-none mb-3">
+          <span data-count="10000" data-suffix="+" class="stat-number">0</span>
+        </div>
+        <p class="text-xs font-sans font-bold tracking-[0.18em] uppercase text-[#3E3630]">Pengrajin Aktif</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =========================================================================
+     HERITAGE QUICK-NAV BAR
+     ========================================================================= -->
+<div class="bg-[#FFFDF9] border-b border-[#E8D9C0] py-6 overflow-x-auto">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <p class="text-[11px] font-sans font-semibold tracking-[0.18em] uppercase text-[#9A6F00] text-center mb-5">Jelajah Warisan Budaya Indonesia</p>
+    <div class="flex items-center justify-center gap-6 sm:gap-10">
+      <!-- 8 categories -->
+      <a href="#ragam-budaya" class="heritage-icon-btn flex flex-col items-center gap-2 group">
+        <span class="icon-circle w-11 h-11 rounded-full bg-[#3E3630] flex items-center justify-center text-[#D99B26] transition-all duration-300">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-2 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+        </span>
+        <span class="icon-label text-[11px] font-sans font-semibold tracking-[0.1em] uppercase text-[#6B6158] transition-colors duration-300">Cagar Budaya</span>
+      </a>
+      <a href="#pasar" class="heritage-icon-btn flex flex-col items-center gap-2 group">
+        <span class="icon-circle w-11 h-11 rounded-full bg-[#3E3630] flex items-center justify-center text-[#D99B26] transition-all duration-300">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+        </span>
+        <span class="icon-label text-[11px] font-sans font-semibold tracking-[0.1em] uppercase text-[#6B6158] transition-colors duration-300">Kuliner Adat</span>
+      </a>
+      <a href="#jurnal" class="heritage-icon-btn flex flex-col items-center gap-2 group">
+        <span class="icon-circle w-11 h-11 rounded-full bg-[#3E3630] flex items-center justify-center text-[#D99B26] transition-all duration-300">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/></svg>
+        </span>
+        <span class="icon-label text-[11px] font-sans font-semibold tracking-[0.1em] uppercase text-[#6B6158] transition-colors duration-300">Tradisi Lisan</span>
+      </a>
+      <a href="#ragam-budaya" class="heritage-icon-btn flex flex-col items-center gap-2 group">
+        <span class="icon-circle w-11 h-11 rounded-full bg-[#3E3630] flex items-center justify-center text-[#D99B26] transition-all duration-300">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg>
+        </span>
+        <span class="icon-label text-[11px] font-sans font-semibold tracking-[0.1em] uppercase text-[#6B6158] transition-colors duration-300">Seni Tari</span>
+      </a>
+      <a href="#jurnal" class="heritage-icon-btn flex flex-col items-center gap-2 group">
+        <span class="icon-circle w-11 h-11 rounded-full bg-[#3E3630] flex items-center justify-center text-[#D99B26] transition-all duration-300">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+        </span>
+        <span class="icon-label text-[11px] font-sans font-semibold tracking-[0.1em] uppercase text-[#6B6158] transition-colors duration-300">Manuskrip</span>
+      </a>
+      <a href="#ragam-budaya" class="heritage-icon-btn flex flex-col items-center gap-2 group">
+        <span class="icon-circle w-11 h-11 rounded-full bg-[#3E3630] flex items-center justify-center text-[#D99B26] transition-all duration-300">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </span>
+        <span class="icon-label text-[11px] font-sans font-semibold tracking-[0.1em] uppercase text-[#6B6158] transition-colors duration-300">Permainan Adat</span>
+      </a>
+      <a href="#pasar" class="heritage-icon-btn flex flex-col items-center gap-2 group">
+        <span class="icon-circle w-11 h-11 rounded-full bg-[#3E3630] flex items-center justify-center text-[#D99B26] transition-all duration-300">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+        </span>
+        <span class="icon-label text-[11px] font-sans font-semibold tracking-[0.1em] uppercase text-[#6B6158] transition-colors duration-300">Kriya Tangan</span>
+      </a>
+      <a href="#jelajah" class="heritage-icon-btn flex flex-col items-center gap-2 group">
+        <span class="icon-circle w-11 h-11 rounded-full bg-[#3E3630] flex items-center justify-center text-[#D99B26] transition-all duration-300">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+        </span>
+        <span class="icon-label text-[11px] font-sans font-semibold tracking-[0.1em] uppercase text-[#6B6158] transition-colors duration-300">Adat & Ritus</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================================================
+     N° 01 — JELAJAH KEPULAUAN (Area Switcher — Showcase Besar & Interaktif)
+     ========================================================================= -->
+<section id="jelajah" class="bg-[#FBF3E4] py-24 sm:py-36">
+  <div class="max-w-[1540px] mx-auto px-4 sm:px-8 lg:px-12">
+
+    <!-- Chapter header -->
+    <div class="flex items-start gap-6 sm:gap-10 mb-14 sm:mb-20 border-t border-[#E8D9C0] pt-12">
+      <span class="text-chapter leading-none select-none flex-shrink-0">01</span>
+      <div class="pt-2">
+        <p class="text-xs font-sans font-bold tracking-[0.2em] uppercase text-[#9A6F00] mb-3 reveal"><span class="text-[#D99B26]">N° 01</span> · Jelajah Area</p>
+        <h2 class="reveal delay-100 font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-[#3E3630] leading-tight">
+          Jelajah Kepulauan<br><span class="text-[#D99B26] italic font-normal font-garamond">Nusantara</span>
+        </h2>
+        <p class="reveal delay-200 mt-4 text-[#6B6158] text-base sm:text-lg max-w-2xl font-sans leading-relaxed">
+          Pilih salah satu dari 6 zona kepulauan Nusantara untuk menjelajahi kearifan adat, arsitektur pusaka, dan ragam karya kriya otentik langsung dari pengrajin daerah.
+        </p>
+      </div>
+    </div>
+
+    <!-- Area tabs (Besar, Jelas, & Berkelas) -->
+    <div class="flex items-center gap-6 sm:gap-10 overflow-x-auto pb-4 mb-12 border-b border-[#E8D9C0] no-scrollbar reveal">
+      <button class="area-tab active flex items-center gap-2 pb-3.5" data-area="sumatera">
+        <span class="text-xs font-bold text-[#D99B26] tracking-widest uppercase">01</span>
+        <span class="font-display font-bold text-sm sm:text-base text-[#3E3630]">Sumatera</span>
+      </button>
+      <button class="area-tab flex items-center gap-2 pb-3.5" data-area="jawa">
+        <span class="text-xs font-bold text-[#D99B26] tracking-widest uppercase">02</span>
+        <span class="font-display font-bold text-sm sm:text-base text-[#3E3630]">Jawa</span>
+      </button>
+      <button class="area-tab flex items-center gap-2 pb-3.5" data-area="bali_nt">
+        <span class="text-xs font-bold text-[#D99B26] tracking-widest uppercase">03</span>
+        <span class="font-display font-bold text-sm sm:text-base text-[#3E3630]">Bali & Nusa Tenggara</span>
+      </button>
+      <button class="area-tab flex items-center gap-2 pb-3.5" data-area="kalimantan">
+        <span class="text-xs font-bold text-[#D99B26] tracking-widest uppercase">04</span>
+        <span class="font-display font-bold text-sm sm:text-base text-[#3E3630]">Kalimantan</span>
+      </button>
+      <button class="area-tab flex items-center gap-2 pb-3.5" data-area="sulawesi">
+        <span class="text-xs font-bold text-[#D99B26] tracking-widest uppercase">05</span>
+        <span class="font-display font-bold text-sm sm:text-base text-[#3E3630]">Sulawesi</span>
+      </button>
+      <button class="area-tab flex items-center gap-2 pb-3.5" data-area="maluku_papua">
+        <span class="text-xs font-bold text-[#D99B26] tracking-widest uppercase">06</span>
+        <span class="font-display font-bold text-sm sm:text-base text-[#3E3630]">Maluku & Papua</span>
+      </button>
+    </div>
+
+    <!-- Map + Info Grid (Skala Besar) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+
+      <!-- Map column (7 cols — Showcase Peta Mega) -->
+      <div class="lg:col-span-7 flex flex-col gap-5">
+        <div class="relative w-full bg-[#FFFDF9] border border-[#E8D9C0] rounded-sm overflow-hidden p-6 sm:p-10 shadow-sm min-h-[480px] sm:min-h-[580px] lg:min-h-[680px] flex items-center justify-center">
+
+          <!-- SVG Map (Scaled Up) -->
+          <img src="assets/icons/indonesia-provinces.svg"
+               alt="Peta Kepulauan Indonesia"
+               class="w-full h-full object-contain pointer-events-none select-none scale-[1.08] filter drop-shadow-sm">
+
+          <!-- Radar Hotspots (Pins Skala Besar) -->
+          <div class="radar-dot" data-area="sumatera" style="left:18%;top:48%;" aria-label="Sumatera">
+            <span class="ping"></span><span class="core"></span>
+          </div>
+          <div class="radar-dot" data-area="jawa" style="left:36%;top:80%;" aria-label="Jawa">
+            <span class="ping"></span><span class="core"></span>
+          </div>
+          <div class="radar-dot" data-area="bali_nt" style="left:61%;top:84%;" aria-label="Bali & Nusa Tenggara">
+            <span class="ping"></span><span class="core"></span>
+          </div>
+          <div class="radar-dot" data-area="kalimantan" style="left:43%;top:46%;" aria-label="Kalimantan">
+            <span class="ping"></span><span class="core"></span>
+          </div>
+          <div class="radar-dot" data-area="sulawesi" style="left:57%;top:56%;" aria-label="Sulawesi">
+            <span class="ping"></span><span class="core"></span>
+          </div>
+          <div class="radar-dot" data-area="maluku_papua" style="left:85%;top:65%;" aria-label="Maluku & Papua">
+            <span class="ping"></span><span class="core"></span>
+          </div>
+        </div>
+
+        <!-- Quick-access legend -->
+        <div class="flex flex-wrap items-center gap-2.5 pt-2">
+          <span class="text-xs font-bold uppercase tracking-wider text-[#9A6F00] mr-2">Pilih Cepat:</span>
+          <button class="area-tab text-xs font-semibold px-3.5 py-2 border border-[#E8D9C0] bg-[#FFFDF9] rounded-sm hover:border-[#D99B26]" data-area="sumatera">01 Sumatera</button>
+          <button class="area-tab text-xs font-semibold px-3.5 py-2 border border-[#E8D9C0] bg-[#FFFDF9] rounded-sm hover:border-[#D99B26]" data-area="jawa">02 Jawa</button>
+          <button class="area-tab text-xs font-semibold px-3.5 py-2 border border-[#E8D9C0] bg-[#FFFDF9] rounded-sm hover:border-[#D99B26]" data-area="bali_nt">03 Bali & NT</button>
+          <button class="area-tab text-xs font-semibold px-3.5 py-2 border border-[#E8D9C0] bg-[#FFFDF9] rounded-sm hover:border-[#D99B26]" data-area="kalimantan">04 Kalimantan</button>
+          <button class="area-tab text-xs font-semibold px-3.5 py-2 border border-[#E8D9C0] bg-[#FFFDF9] rounded-sm hover:border-[#D99B26]" data-area="sulawesi">05 Sulawesi</button>
+          <button class="area-tab text-xs font-semibold px-3.5 py-2 border border-[#E8D9C0] bg-[#FFFDF9] rounded-sm hover:border-[#D99B26]" data-area="maluku_papua">06 Maluku & Papua</button>
+        </div>
+      </div>
+
+      <!-- Info panel (5 cols — Detail Luas & Kaya) -->
+      <div class="lg:col-span-5">
+        <div id="area-info-panel" class="area-panel bg-[#FFFDF9] border border-[#E8D9C0] p-8 sm:p-10 rounded-sm shadow-md">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =========================================================================
+     N° 02 — RAGAM BUDAYA (Editorial Asymmetric Grid)
+     ========================================================================= -->
+<section id="ragam-budaya" class="bg-[#FBF3E4] py-20 sm:py-28 border-t border-[#E8D9C0]">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
+    <!-- Chapter header -->
+    <div class="flex items-start gap-6 sm:gap-10 mb-12 sm:mb-16 border-t border-[#E8D9C0] pt-10">
+      <span class="text-chapter leading-none select-none flex-shrink-0">02</span>
+      <div class="pt-2">
+        <p class="text-xs font-sans font-bold tracking-[0.2em] uppercase text-[#9A6F00] mb-3 reveal"><span class="text-[#D99B26]">N° 02</span> · Ragam Warisan</p>
+        <h2 class="reveal delay-100 font-display font-bold text-3xl sm:text-5xl text-[#3E3630] leading-tight">
+          Ragam Budaya<br><span class="text-[#D99B26] italic font-normal font-garamond">yang Melampaui Waktu</span>
+        </h2>
+      </div>
+    </div>
+
+    <!-- Editorial asymmetric: sticky left text + scroll-right images -->
+    <div class="grid lg:grid-cols-5 gap-12 lg:gap-20">
+
+      <!-- Left sticky col (2/5) -->
+      <div class="lg:col-span-2 editorial-sticky-title">
+        <p class="reveal font-sans text-[#6B6158] leading-relaxed mb-6">
+          Setiap lembaran sejarah Nusantara mengandung keindahan yang tak tertandingi: dari ukiran kayu, sulaman sutra, hingga gerak tari yang menjadi doa bagi semesta.
+        </p>
+        <div class="reveal delay-100 hairline mb-6"></div>
+        <p class="reveal delay-200 font-garamond font-light italic text-2xl text-[#3E3630] leading-relaxed">
+          "Budaya bukan warisan masa lalu; ia adalah bahan bakar masa depan."
+        </p>
+        <p class="reveal delay-300 text-[11px] font-sans tracking-[0.15em] uppercase text-[#6B6158] mt-3">· Nusava Manifesto</p>
+
+        <!-- Tari Kecak arch photo -->
+        <div class="reveal delay-400 mt-10 relative overflow-hidden rounded-t-full" style="aspect-ratio: 3/4;">
+          <img src="assets/images/tak-berjudul-74-20261026220354-20.png"
+               alt="Tari Kecak Bali"
+               class="w-full h-full object-cover">
+          <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-[#3E3630]/80 to-transparent p-4">
+            <p class="text-white text-xs font-sans font-semibold tracking-wider uppercase">Tari Kecak · Uluwatu, Bali</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right scrolling images (3/5) -->
+      <div class="lg:col-span-3 flex flex-col gap-6">
+
+        <!-- Culture card 1 -->
+        <div class="culture-card reveal-popup h-64 sm:h-72 rounded-sm overflow-hidden">
+          <img src="assets/images/image-100.png" alt="Batik Jawa" class="w-full h-full object-cover">
+          <div class="culture-card-caption">
+            <p class="text-white text-xs font-bold tracking-widest uppercase">Wastra & Batik</p>
+            <p class="text-white/80 text-xs mt-1">Batik Tulis Keraton Surakarta</p>
+          </div>
+        </div>
+
+        <!-- Culture card 2 — tilted offset -->
+        <div class="culture-card reveal-popup delay-100 h-64 sm:h-72 rounded-sm overflow-hidden lg:-mr-8">
+          <img src="assets/images/image-110.png" alt="Tenun Ikat" class="w-full h-full object-cover">
+          <div class="culture-card-caption">
+            <p class="text-white text-xs font-bold tracking-widest uppercase">Tenun Ikat</p>
+            <p class="text-white/80 text-xs mt-1">Sumba Timur · Nusa Tenggara Timur</p>
+          </div>
+        </div>
+
+        <!-- Culture card 3 -->
+        <div class="culture-card reveal-popup delay-200 h-64 sm:h-72 rounded-sm overflow-hidden">
+          <img src="assets/images/image-130.png" alt="Arsitektur Toraja" class="w-full h-full object-cover">
+          <div class="culture-card-caption">
+            <p class="text-white text-xs font-bold tracking-widest uppercase">Arsitektur Adat</p>
+            <p class="text-white/80 text-xs mt-1">Rumah Tongkonan · Toraja, Sulawesi</p>
+          </div>
+        </div>
+
+        <!-- Culture card 4 — extra detail -->
+        <div class="culture-card reveal-popup delay-300 h-64 sm:h-72 rounded-sm overflow-hidden lg:-ml-8">
+          <img src="assets/images/image-140.png" alt="Ukiran Kalimantan" class="w-full h-full object-cover">
+          <div class="culture-card-caption">
+            <p class="text-white text-xs font-bold tracking-widest uppercase">Kriya Dayak</p>
+            <p class="text-white/80 text-xs mt-1">Ukiran Kayu Ulin · Kalimantan</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================================
+     GRADIENT BRIDGE : Ragam Budaya into Produk Nusani (Halus & Elegan)
+     ========================================================================= -->
+<div class="gradient-bridge-down w-full h-24 sm:h-36 -mb-px relative z-10" aria-hidden="true">
+  <div class="h-full flex items-center justify-center">
+    <div class="w-32 h-px bg-gradient-to-r from-transparent via-[#D99B26]/50 to-transparent"></div>
+  </div>
+</div>
+
+<!-- =========================================================================
+     N° 02b — PRODUK NUSANI (4 Pillars — dark section)
+     ========================================================================= -->
+<section id="produk" class="bg-[#3E3630] py-20 sm:py-28">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
+    <!-- Header -->
+    <div class="text-center mb-14 sm:mb-18">
+      <p class="text-[11px] font-sans font-semibold tracking-[0.18em] uppercase text-[#9A6F00]/80 mb-3 reveal">N° 02 : Produk Nusani</p>
+      <h2 class="reveal delay-100 font-display font-bold text-3xl sm:text-4xl text-[#FCF0DA] leading-tight">
+        Empat Pilar Warisan<br><span class="text-[#D99B26]">yang Kami Dampingi</span>
+      </h2>
+    </div>
+
+    <!-- 4-pilar editorial grid with vertical hairlines -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 divide-white/10 lg:divide-x lg:divide-y-0 border border-white/10">
+
+      <!-- Pilar 1: Seni Pengrajin -->
+      <div class="pilar-card reveal-popup p-8 lg:p-10 flex flex-col gap-5">
+        <div class="w-12 h-12 rounded-full border border-[#D99B26]/40 flex items-center justify-center text-[#D99B26]">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        </div>
+        <div>
+          <p class="text-[11px] font-sans font-bold tracking-[0.18em] uppercase text-[#D99B26]/80 mb-2">01</p>
+          <h3 class="font-display font-bold text-xl text-[#FCF0DA] mb-3">Seni Pengrajin</h3>
+          <p class="font-sans text-sm text-[#FCF0DA]/75 leading-relaxed">Karya tangan penuh kreativitas mencerminkan keindahan, ketelitian, dan warisan budaya Nusantara.</p>
+        </div>
+        <a href="#pasar" class="pilar-link mt-auto text-[11px] font-sans font-bold tracking-[0.16em] uppercase text-[#D99B26] flex items-center gap-2 hover:gap-3 transition-all duration-300">Jelajahi Kriya →</a>
+      </div>
+
+      <!-- Pilar 2: Pakaian & Wastra -->
+      <div class="pilar-card reveal-popup delay-100 p-8 lg:p-10 flex flex-col gap-5">
+        <div class="w-12 h-12 rounded-full border border-[#D99B26]/40 flex items-center justify-center text-[#D99B26]">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        </div>
+        <div>
+          <p class="text-[11px] font-sans font-bold tracking-[0.18em] uppercase text-[#D99B26]/80 mb-2">02</p>
+          <h3 class="font-display font-bold text-xl text-[#FCF0DA] mb-3">Pakaian & Wastra</h3>
+          <p class="font-sans text-sm text-[#FCF0DA]/75 leading-relaxed">Beragam busana khas daerah dengan motif corak unik yang menggambarkan identitas dan kekayaan budaya Indonesia.</p>
+        </div>
+        <a href="#pasar" class="pilar-link mt-auto text-[11px] font-sans font-bold tracking-[0.16em] uppercase text-[#D99B26] flex items-center gap-2 hover:gap-3 transition-all duration-300">Jelajahi Wastra →</a>
+      </div>
+
+      <!-- Pilar 3: Aksesoris Tradisi -->
+      <div class="pilar-card reveal-popup delay-200 p-8 lg:p-10 flex flex-col gap-5">
+        <div class="w-12 h-12 rounded-full border border-[#D99B26]/40 flex items-center justify-center text-[#D99B26]">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+        </div>
+        <div>
+          <p class="text-[11px] font-sans font-bold tracking-[0.18em] uppercase text-[#D99B26]/80 mb-2">03</p>
+          <h3 class="font-display font-bold text-xl text-[#FCF0DA] mb-3">Aksesoris Tradisi</h3>
+          <p class="font-sans text-sm text-[#FCF0DA]/75 leading-relaxed">Sentuhan budaya dalam setiap detail, dari perhiasan hingga aksesori khas daerah dengan makna dan keindahan tersendiri.</p>
+        </div>
+        <a href="#pasar" class="pilar-link mt-auto text-[11px] font-sans font-bold tracking-[0.16em] uppercase text-[#D99B26] flex items-center gap-2 hover:gap-3 transition-all duration-300">Jelajahi Aksesori →</a>
+      </div>
+
+      <!-- Pilar 4: Alat Musik -->
+      <div class="pilar-card reveal-popup delay-300 p-8 lg:p-10 flex flex-col gap-5">
+        <div class="w-12 h-12 rounded-full border border-[#D99B26]/40 flex items-center justify-center text-[#D99B26]">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg>
+        </div>
+        <div>
+          <p class="text-[11px] font-sans font-bold tracking-[0.18em] uppercase text-[#D99B26]/80 mb-2">04</p>
+          <h3 class="font-display font-bold text-xl text-[#FCF0DA] mb-3">Alat Musik</h3>
+          <p class="font-sans text-sm text-[#FCF0DA]/75 leading-relaxed">Kenali instrumen tradisional Nusantara yang menghadirkan melodi unik dari setiap tradisi dan kesenian daerah.</p>
+        </div>
+        <a href="#pasar" class="pilar-link mt-auto text-[11px] font-sans font-bold tracking-[0.16em] uppercase text-[#D99B26] flex items-center gap-2 hover:gap-3 transition-all duration-300">Jelajahi Musik →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =========================================================================
+     GRADIENT BRIDGE : Produk Nusani back into Pasar Nusani (Halus & Elegan)
+     ========================================================================= -->
+<div class="gradient-bridge-up w-full h-24 sm:h-36 -mt-px relative z-10" aria-hidden="true">
+  <div class="h-full flex items-center justify-center">
+    <div class="w-32 h-px bg-gradient-to-r from-transparent via-[#D99B26]/50 to-transparent"></div>
+  </div>
+</div>
+
+<!-- =========================================================================
+     N° 03 — PASAR NUSANI (Curated Marketplace)
+     ========================================================================= -->
+<section id="pasar" class="bg-[#FBF3E4] py-20 sm:py-28 border-t border-[#E8D9C0]">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
+    <!-- Chapter header -->
+    <div class="flex items-start gap-6 sm:gap-10 mb-12 sm:mb-16 border-t border-[#E8D9C0] pt-10">
+      <span class="text-chapter leading-none select-none flex-shrink-0">03</span>
+      <div class="pt-2">
+        <p class="text-xs font-sans font-bold tracking-[0.2em] uppercase text-[#9A6F00] mb-3 reveal"><span class="text-[#D99B26]">N° 03</span> · Pasar Kriya</p>
+        <h2 class="reveal delay-100 font-display font-bold text-3xl sm:text-5xl text-[#3E3630] leading-tight">
+          Pasar Nusani<br><span class="text-[#D99B26] italic font-normal font-garamond">Karya & Kriya Lokal</span>
+        </h2>
+        <p class="reveal delay-200 mt-4 text-[#6B6158] text-base max-w-xl">Koleksi otentik langsung dari tangan pengrajin daerah terverifikasi. Setiap pembelian mendukung kemandirian UMKM budaya Indonesia.</p>
+      </div>
+    </div>
+
+    <!-- Filter tabs -->
+    <div class="reveal flex flex-wrap gap-2 mb-10">
+      <button class="filter-tab active" data-filter="all">Semua Karya</button>
+      <button class="filter-tab" data-filter="wastra">Wastra & Tenun</button>
+      <button class="filter-tab" data-filter="kriya">Kriya & Ukir</button>
+      <button class="filter-tab" data-filter="musik">Instrumen</button>
+      <button class="filter-tab" data-filter="seni">Seni Rupa</button>
+    </div>
+
+    <!-- Product grid — rendered by JS -->
+    <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
+
+  </div>
+</section>
+
+<!-- =========================================================================
+     N° 04 — JURNAL NUSANTARA (Horizontal Slider)
+     ========================================================================= -->
+<section id="jurnal" class="bg-[#FFFDF9] py-20 sm:py-28 border-t border-[#E8D9C0]">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
+    <!-- Chapter header + controls -->
+    <div class="flex items-end justify-between gap-6 mb-10 border-t border-[#E8D9C0] pt-10">
+      <div class="flex items-start gap-6 sm:gap-10">
+        <span class="text-chapter leading-none select-none flex-shrink-0">04</span>
+        <div class="pt-2">
+          <p class="text-xs font-sans font-bold tracking-[0.2em] uppercase text-[#9A6F00] mb-3 reveal"><span class="text-[#D99B26]">N° 04</span> · Jurnal Nusantara</p>
+          <h2 class="reveal delay-100 font-display font-bold text-3xl sm:text-5xl text-[#3E3630] leading-tight">
+            Jurnal Nusantara
+          </h2>
+        </div>
+      </div>
+      <!-- Navigation -->
+      <div class="flex items-center gap-3 flex-shrink-0">
+        <button id="journal-prev" class="w-10 h-10 border border-[#E8D9C0] flex items-center justify-center text-[#3E3630] hover:border-[#D99B26] hover:text-[#D99B26] transition-colors" aria-label="Sebelumnya">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"/></svg>
+        </button>
+        <button id="journal-next" class="w-10 h-10 border border-[#E8D9C0] flex items-center justify-center text-[#3E3630] hover:border-[#D99B26] hover:text-[#D99B26] transition-colors" aria-label="Berikutnya">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Slider track container -->
+    <div class="overflow-hidden">
+      <div id="journal-track" class="journal-track gap-4"></div>
+    </div>
+
+    <!-- Dot pagination -->
+    <div id="journal-dots" class="flex items-center gap-2 mt-6"></div>
+
+  </div>
+</section>
+
+<!-- =========================================================================
+     GRADIENT BRIDGE : Jurnal Nusantara into Footer (Transisi Mulus & Elegan)
+     ========================================================================= -->
+<div class="gradient-bridge-down w-full h-24 sm:h-32 -mb-px relative z-10" aria-hidden="true">
+  <div class="h-full flex items-center justify-center">
+    <div class="w-32 h-px bg-gradient-to-r from-transparent via-[#D99B26]/50 to-transparent"></div>
+  </div>
+</div>
+
+<!-- =========================================================================
+     FOOTER
+     ========================================================================= -->
+<footer class="bg-[#3E3630] pt-16 sm:pt-20 pb-8">
+
+  <!-- Cloud ornament accent at top of footer -->
+  <div class="w-full h-16 opacity-[0.06] bg-center bg-repeat-x mb-10"
+       style="background-image:url('assets/images/latar-ornamen-awan-jawa-tradisional-30.png');background-size:auto 64px;"></div>
+
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
+    <!-- Footer grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-14 border-b border-white/10">
+
+      <!-- Brand (5 cols) -->
+      <div class="lg:col-span-5">
+        <a href="#hero" class="inline-block mb-5">
+          <span class="font-garamond text-3xl font-normal italic text-[#FCF0DA]">Nusa<span class="text-[#D99B26] not-italic font-semibold">va</span></span>
+        </a>
+        <p class="text-[11px] font-sans tracking-[0.2em] uppercase text-[#FCF0DA]/65 mb-5">Merawat Budaya · Menggerakkan Karya</p>
+        <p class="font-sans text-sm text-[#FCF0DA]/75 leading-relaxed max-w-sm mb-6">Platform digital inisiatif siswa SMKN 1 Denpasar yang menghubungkan pelaku UMKM pengrajin budaya lokal dengan pasar global.</p>
+        <!-- Social icons -->
+        <div class="flex gap-4">
+          <a href="#" class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/40 hover:border-[#D99B26] hover:text-[#D99B26] transition-all" aria-label="Instagram">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="#" class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/40 hover:border-[#D99B26] hover:text-[#D99B26] transition-all" aria-label="TikTok">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          </a>
+          <a href="#" class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/40 hover:border-[#D99B26] hover:text-[#D99B26] transition-all" aria-label="YouTube">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Nav links (2 cols) -->
+      <div class="lg:col-span-2">
+        <h4 class="text-[11px] font-sans font-bold tracking-[0.2em] uppercase text-[#D99B26] mb-5">Navigasi</h4>
+        <ul class="space-y-3">
+          <li><a href="#hero"         class="footer-link">Beranda</a></li>
+          <li><a href="#jelajah"      class="footer-link">Peta Interaktif</a></li>
+          <li><a href="#ragam-budaya" class="footer-link">Ragam Budaya</a></li>
+          <li><a href="#pasar"        class="footer-link">Pasar Kriya</a></li>
+          <li><a href="#jurnal"       class="footer-link">Jurnal Nusantara</a></li>
+        </ul>
+      </div>
+
+      <!-- Categories (2 cols) -->
+      <div class="lg:col-span-2">
+        <h4 class="text-[11px] font-sans font-bold tracking-[0.2em] uppercase text-[#D99B26] mb-5">Kategori</h4>
+        <ul class="space-y-3">
+          <li><a href="#pasar" class="footer-link">Wastra & Tenun</a></li>
+          <li><a href="#pasar" class="footer-link">Kriya & Ukiran</a></li>
+          <li><a href="#pasar" class="footer-link">Instrumen Musik</a></li>
+          <li><a href="#pasar" class="footer-link">Seni Rupa</a></li>
+          <li><a href="#pasar" class="footer-link">Aksesori Tradisi</a></li>
+        </ul>
+      </div>
+
+      <!-- Newsletter (3 cols) -->
+      <div class="lg:col-span-3">
+        <h4 class="text-[11px] font-sans font-bold tracking-[0.2em] uppercase text-[#D99B26] mb-5">Warta Budaya</h4>
+        <p class="text-sm text-[#FCF0DA]/70 leading-relaxed mb-5">Terima pembaruan kurasi budaya, kisah pengrajin, dan kabar dari seluruh Nusantara langsung ke kotak masuk Anda.</p>
+        <form id="newsletter-form" class="flex flex-col gap-3">
+          <input
+            type="email"
+            placeholder="alamat@email.com"
+            class="px-4 py-3 bg-white/5 border border-white/15 text-[#FCF0DA] text-sm placeholder-white/25 focus:outline-none focus:border-[#D99B26] transition-colors"
+            required>
+          <button type="submit" class="px-5 py-3 bg-[#D99B26] text-white text-[11px] font-bold tracking-[0.2em] uppercase hover:bg-[#E5A93C] transition-colors">Berlangganan</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Footer bottom bar -->
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8">
+      <p class="text-[11px] font-sans tracking-[0.12em] text-[#FCF0DA]/65">© 2026 Nusava · SMKN 1 Denpasar. Semua hak dilindungi.</p>
+      <div class="flex gap-5">
+        <a href="#" class="footer-link text-[11px]">Kebijakan Privasi</a>
+        <a href="#" class="footer-link text-[11px]">Syarat Layanan</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- =========================================================================
+     VIDEO MODAL — fullscreen play
+     ========================================================================= -->
+<div id="video-modal" class="hidden fixed inset-0 z-[100] bg-black/92 flex items-center justify-center p-4 sm:p-8" role="dialog" aria-modal="true" aria-label="Video Wonderful Indonesia">
+  <button id="video-modal-close" class="absolute top-5 right-5 w-10 h-10 rounded-full border border-white/30 flex items-center justify-center text-white hover:border-white/70 transition-all" aria-label="Tutup">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
+  </button>
+  <video
+    id="modal-video"
+    src="./assets/video/wonderful-indonesia.mp4"
+    controls
+    preload="none"
+    poster="assets/images/image-30.png"
+    class="w-full rounded-sm shadow-2xl"
+    style="max-height: 85vh;">
+    <source src="./assets/video/wonderful-indonesia.mp4" type="video/mp4">
+    Browser Anda tidak mendukung tag video.
+  </video>
+</div>
+
+<!-- =========================================================================
+     QUICK VIEW MODAL
+     ========================================================================= -->
+<div id="quick-view-modal" class="hidden fixed inset-0 z-[90] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 sm:p-8" role="dialog" aria-modal="true">
+  <div id="qv-modal-dialog" class="bg-[#FFFDF9] max-w-2xl w-full p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto rounded-sm border border-[#E8D9C0] shadow-2xl">
+    <button id="qv-close" class="absolute top-4 right-4 text-[#3E3630] hover:text-[#D99B26] transition-colors" aria-label="Tutup">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    <div id="qv-content"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="hide fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-5 py-3 bg-[#3E3630] text-[#FCF0DA] text-xs font-sans tracking-wide shadow-lg flex items-center gap-3" role="status" aria-live="polite">
+  <svg class="w-4 h-4 text-[#D99B26] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+  <span id="toast-msg">Ditambahkan ke keranjang</span>
+</div>
+
+<!-- =========================================================================
+     JavaScript
+     ========================================================================= -->
+<script src="js/main.js"></script>
+</body>
+</html>

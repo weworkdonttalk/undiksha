@@ -1,0 +1,26 @@
+{
+  "ground": {
+    "tanah_rumput_kiri": {"x": 13, "y": 454, "w": 32, "h": 32},
+    "tanah_rumput_tengah": {"x": 56, "y": 454, "w": 32, "h": 32},
+    "tanah_rumput_kanan": {"x": 98, "y": 454, "w": 32, "h": 32},
+    "tanah_isi_bawah": {"x": 56, "y": 490, "w": 32, "h": 32}
+  },
+  "platforms": {
+    "batu_candi_kiri": {"x": 12, "y": 24, "w": 34, "h": 32},
+    "batu_candi_tengah": {"x": 92, "y": 24, "w": 72, "h": 32},
+    "batu_candi_kanan": {"x": 164, "y": 24, "w": 34, "h": 32},
+    "batu_merah_kiri": {"x": 12, "y": 234, "w": 34, "h": 32},
+    "batu_merah_tengah": {"x": 92, "y": 234, "w": 72, "h": 32},
+    "batu_merah_kanan": {"x": 164, "y": 234, "w": 34, "h": 32}
+  },
+  "decorations": {
+    "relief_dinding": {"x": 605, "y": 20, "w": 36, "h": 36},
+    "stupa_candi": {"x": 566, "y": 20, "w": 34, "h": 36},
+    "arca_singa": {"x": 607, "y": 126, "w": 34, "h": 34},
+    "sulur_gantung": {"x": 489, "y": 20, "w": 34, "h": 36},
+    "pilar_batu": {"x": 607, "y": 668, "w": 34, "h": 72}
+  },
+  "hazards": {
+    "duri_perangkap": {"x": 492, "y": 136, "w": 34, "h": 22}
+  }
+}

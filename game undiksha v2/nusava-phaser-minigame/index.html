@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#2E241E">
+  <title>PUSAKA — Nusava Adventure · TECHTOPIA Vol. 2</title>
+
+  <!-- ── Tailwind CSS CDN (sesuai ketentuan lomba, tanpa bundler) ── -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            nusava: {
+              cream:         '#FAF6F0',
+              beige:         '#F1E8DC',
+              sand:          '#DFD3C3',
+              terracotta:    '#C2593F',
+              terracottaDark:'#9C3D27',
+              wood:          '#2E241E',
+              woodLight:     '#4A3B32',
+              gold:          '#D4AF37',
+              goldDark:      '#AA820A',
+              sage:          '#7C8A69',
+            }
+          },
+          fontFamily: {
+            display: ['Cinzel','Georgia','serif'],
+            sans:    ['Inter','system-ui','sans-serif'],
+          },
+          backgroundImage: {
+            'batik-pattern': "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0 L40 20 L20 40 L0 20 Z' fill='none' stroke='%23D4AF3715' stroke-width='1'/%3E%3C/svg%3E\")",
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- ── External Custom CSS ── -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="bg-nusava-cream text-nusava-wood min-h-dvh flex flex-col select-none">
+
+  <!-- ════════════════════════════════════════════════════════
+       NAVBAR
+  ════════════════════════════════════════════════════════ -->
+  <header id="navbar"
+          class="sticky top-0 z-40 bg-nusava-cream/90 shadow-sm">
+    <div class="max-w-5xl mx-auto px-4 py-2.5 flex items-center justify-between gap-3">
+
+      <!-- Brand -->
+      <div class="flex items-center gap-2.5">
+        <div class="nav-logo-ring w-9 h-9 shrink-0">
+          <div class="nav-logo-inner w-full h-full">N</div>
+        </div>
+        <div class="leading-none">
+          <h1 class="font-display font-bold text-base md:text-lg tracking-wide text-nusava-wood flex items-center gap-2 flex-wrap">
+            PUSAKA
+            <span class="text-[10px] font-sans font-semibold px-2 py-0.5 rounded-full bg-nusava-gold/20 text-nusava-woodLight border border-nusava-gold/40 tracking-wider">
+              TECHTOPIA Vol.2
+            </span>
+          </h1>
+          <p class="text-[10px] text-nusava-woodLight hidden sm:block mt-0.5 font-sans">
+            Preserving Unity, Sustaining Ancestral Knowledge &amp; Artistry
+          </p>
+        </div>
+      </div>
+
+      <!-- Nav Actions (minimal — for landing page) -->
+      <div class="flex items-center gap-2">
+        <!-- Audio Toggle -->
+        <button id="audio-btn"
+                class="btn-secondary flex items-center gap-1.5 px-2.5 py-1.5"
+                title="Toggle Audio SFX">
+          <span class="text-xs uppercase tracking-wider text-nusava-gold font-mono">Audio</span>
+          <span id="audio-icon" class="text-xs font-bold text-nusava-cream">ON</span>
+        </button>
+
+        <!-- Gallery / Game Toggle -->
+        <button id="view-toggle-btn"
+                class="btn-primary flex items-center gap-1.5 px-3 py-1.5">
+          <span id="view-toggle-text">Galeri Pusaka</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ════════════════════════════════════════════════════════
+       MAIN CONTENT
+  ════════════════════════════════════════════════════════ -->
+  <main class="flex-1 max-w-5xl w-full mx-auto px-3 py-4 md:py-6 flex flex-col gap-4">
+
+
+    <!-- ══ GAME SECTION ══════════════════════════════════════ -->
+    <section id="game-section" class="w-full">
+
+      <!-- HUD Bar (above canvas) -->
+      <div id="hud-bar"
+           class="w-full rounded-t-2xl px-3 py-2 flex items-center justify-between gap-2 overflow-x-auto">
+
+        <div class="flex items-center gap-2 shrink-0">
+          <!-- Collection Progress -->
+          <div class="hud-chip">
+            <div>
+              <div class="hud-chip-label">Koleksi Pusaka</div>
+              <div class="hud-chip-value" id="hud-progress">0 / 7</div>
+            </div>
+          </div>
+
+          <!-- Score -->
+          <div class="hud-chip">
+            <div>
+              <div class="hud-chip-label">Poin Budaya</div>
+              <div class="hud-chip-value" id="hud-score">0 XP</div>
+            </div>
+          </div>
+
+          <!-- HP Bar -->
+          <div class="hud-chip gap-2">
+            <div>
+              <div class="hud-chip-label">Vitalitas</div>
+              <div class="hp-track mt-1">
+                <div class="hp-fill" id="hp-fill" style="width:100%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controls hint (desktop) -->
+        <div class="hidden lg:flex items-center gap-1.5 text-[11px] text-nusava-gold/70 font-mono">
+          <span class="key-badge">A</span><span class="key-badge">D</span>
+          <span class="mr-1 text-nusava-gold/40">Jalan</span>
+          <span class="key-badge">W</span>
+          <span class="mr-1 text-nusava-gold/40">Lompat</span>
+          <span class="key-badge text-nusava-terracotta border-nusava-terracotta/50">E</span>
+          <span class="text-nusava-gold/40">Interaksi</span>
+        </div>
+
+        <!-- Reset -->
+        <button id="btn-reset"
+                class="text-[11px] text-nusava-gold/50 hover:text-nusava-gold transition font-medium ml-auto">
+          ↺ Reset
+        </button>
+      </div>
+
+      <!-- Canvas Container -->
+      <div id="game-wrapper"
+           class="relative w-full aspect-[16/9] overflow-hidden rounded-b-2xl shadow-2xl">
+
+        <!-- Game Canvas -->
+        <canvas id="game-canvas" class="w-full h-full block"></canvas>
+
+        <!-- Overlay anchor for DOM particles -->
+        <div id="canvas-overlay"
+             class="absolute inset-0 pointer-events-none overflow-hidden z-10"></div>
+
+        <!-- Zone Toast -->
+        <div id="zone-toast"
+             class="absolute top-3 left-3 text-nusava-gold text-[11px] px-3 py-1.5 z-20"
+             style="opacity:0">
+          Memuat...
+        </div>
+
+        <!-- Proximity Prompt -->
+        <div id="proximity-prompt"
+             class="absolute bottom-5 left-1/2 -translate-x-1/2 z-20"
+             style="opacity:0;transform:translateY(10px) translateX(-50%)">
+          <div class="flex items-center gap-2.5 bg-nusava-wood/90 text-nusava-cream px-4 py-2 rounded-full border border-nusava-gold/60 shadow-xl backdrop-blur-sm">
+            <span class="w-6 h-6 rounded-full bg-nusava-terracotta text-nusava-cream text-[10px] font-bold flex items-center justify-center border border-nusava-gold shrink-0">E</span>
+            <span class="text-[11px] font-medium">
+              Dekati &amp; tekan <strong class="text-nusava-gold">E</strong> — 
+              <span id="proximity-name" class="text-nusava-gold italic">artefak pusaka</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Win Banner -->
+        <div id="win-banner"
+             class="hidden absolute top-1/2 left-1/2 -translate-y-1/2 text-center px-8 py-5 z-30 shadow-2xl"
+             style="min-width:260px">
+          <div class="text-nusava-gold text-[10px] font-mono uppercase tracking-widest mb-1">Misi Selesai</div>
+          <div class="text-nusava-gold font-display font-bold text-lg mb-1">Seluruh Pusaka Dikuasai!</div>
+          <div class="text-nusava-cream/80 text-xs">Kamu telah menjadi Penjaga Budaya Nusantara</div>
+        </div>
+
+        <!-- Progress markers bar drawn on canvas, but add subtle vignette overlay -->
+        <div class="absolute inset-0 pointer-events-none z-5"
+             style="background:radial-gradient(ellipse 110% 120% at 50% 50%,transparent 60%,rgba(26,20,16,.28) 100%)"></div>
+      </div>
+
+      <!-- Mobile Touch Controls -->
+      <div class="md:hidden w-full bg-nusava-wood/60 backdrop-blur-sm rounded-b-2xl border-t border-nusava-gold/20 px-4 py-3 flex items-center justify-between">
+        <!-- D-Pad -->
+        <div class="flex items-center gap-2">
+          <button id="btn-left" class="touch-btn dpad-btn">◀</button>
+          <button id="btn-right" class="touch-btn dpad-btn">▶</button>
+        </div>
+
+        <!-- D-Pad Up (center) -->
+        <div class="flex flex-col items-center gap-1">
+          <span class="text-[9px] text-nusava-gold/50 font-mono uppercase tracking-widest">Controls</span>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex items-center gap-2.5">
+          <div class="flex flex-col items-center gap-0.5">
+            <button id="btn-interact" class="touch-btn action-btn-interact">
+              <span class="font-bold text-xs">E</span>
+              <span style="font-size:9px">Kaji</span>
+            </button>
+          </div>
+          <div class="flex flex-col items-center gap-0.5">
+            <button id="btn-jump" class="touch-btn action-btn-jump">▲</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══ GALLERY SECTION (hidden by default) ═══════════════ -->
+    <section id="gallery-section" class="w-full hidden">
+      <div class="text-center mb-6">
+        <span class="text-[11px] font-bold uppercase tracking-widest text-nusava-terracotta">Ensiklopedia Nusantara</span>
+        <h2 class="font-display font-bold text-2xl md:text-3xl text-nusava-wood mt-1">
+          Katalog Pusaka &amp; Kriya Nusantara
+        </h2>
+        <p class="text-sm text-nusava-woodLight mt-1.5 max-w-xl mx-auto font-sans">
+          Temukan filosofi di balik artefak budaya dengan menjelajahi dunia game, lalu pelajari lebih dalam di sini.
+        </p>
+      </div>
+
+      <div id="gallery-grid"
+           class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ════════════════════════════════════════════════════════
+       ARTIFACT MODAL DIALOG
+  ════════════════════════════════════════════════════════ -->
+  <div id="artifact-modal"
+       class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-nusava-wood/75 backdrop-blur-md hidden"
+       style="opacity:0">
+
+    <div id="modal-card"
+         class="modal-card w-full max-w-lg flex flex-col max-h-[90dvh]"
+         style="transform:scale(0.92)">
+
+      <!-- Modal Header -->
+      <div class="flex items-start justify-between gap-3 p-5 pb-3 border-b border-nusava-sand">
+        <div class="flex items-center gap-3 min-w-0">
+          <!-- Artifact thumbnail -->
+          <div class="w-12 h-12 rounded-xl border-2 border-nusava-sand bg-nusava-beige flex items-center justify-center text-sm font-bold text-nusava-wood overflow-hidden shrink-0"
+               id="modal-icon">Pusaka</div>
+
+          <div class="min-w-0">
+            <div class="flex items-center gap-2 flex-wrap mb-0.5">
+              <span id="modal-category"
+                    class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-nusava-terracotta/15 text-nusava-terracotta border border-nusava-terracotta/30">
+                Kategori
+              </span>
+              <span id="modal-origin" class="text-[11px] text-nusava-woodLight font-medium">Asal Daerah</span>
+            </div>
+            <h3 id="modal-title"
+                class="font-display font-bold text-lg sm:text-xl text-nusava-wood leading-snug">
+              Nama Artefak
+            </h3>
+          </div>
+        </div>
+
+        <button id="modal-close-btn"
+                class="w-8 h-8 rounded-full bg-nusava-beige hover:bg-nusava-sand text-nusava-wood flex items-center justify-center text-sm font-bold transition shrink-0">
+          ✕
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="overflow-y-auto custom-scroll px-5 py-4 flex-1 flex flex-col gap-4">
+
+        <!-- Description -->
+        <div class="textbox-frame p-4">
+          <h4 class="font-display font-semibold text-sm text-nusava-wood mb-2 flex items-center gap-1.5">
+            Sejarah &amp; Filosofi Budaya
+          </h4>
+          <p id="modal-desc"
+             class="text-xs sm:text-sm text-nusava-woodLight leading-relaxed text-justify">
+          </p>
+        </div>
+
+        <!-- Lore (extra paragraph) -->
+        <div class="bg-nusava-beige/70 rounded-xl p-3 border border-nusava-sand/50">
+          <h4 class="text-[11px] font-bold uppercase tracking-wider text-nusava-goldDark mb-1.5 flex items-center gap-1.5">
+            Fakta Menarik
+          </h4>
+          <p id="modal-lore"
+             class="text-[11px] sm:text-xs text-nusava-woodLight leading-relaxed italic">
+          </p>
+        </div>
+
+        <!-- Quiz Box -->
+        <div class="bg-nusava-beige border border-nusava-sand rounded-xl p-4">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-nusava-terracotta flex items-center gap-1.5">
+              Kuis Kilat Pusaka
+            </span>
+            <span id="quiz-status"
+                  class="text-[10px] font-medium text-nusava-woodLight">
+              Pilih salah satu jawaban:
+            </span>
+          </div>
+          <p id="quiz-question"
+             class="text-sm font-semibold text-nusava-wood mb-3 leading-snug">
+            Pertanyaan akan muncul di sini...
+          </p>
+          <div id="quiz-options" class="flex flex-col gap-2">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-5 py-3.5 border-t border-nusava-sand flex items-center justify-between gap-3">
+        <span class="text-[11px] text-nusava-woodLight italic">Tersimpan dalam arsip penjelajah</span>
+        <button id="modal-continue-btn" class="btn-primary flex items-center gap-1.5">
+          Lanjutkan Petualangan <span>➔</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════════════════════
+       SCRIPTS (external, sesuai ketentuan lomba)
+  ════════════════════════════════════════════════════════ -->
+  <script src="js/data.js"></script>
+  <script src="js/game.js"></script>
+
+</body>
+</html>
